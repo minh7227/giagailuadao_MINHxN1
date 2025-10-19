@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảnh Báo: Lừa Đảo Giả Gái Trên Mạng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fefcf9; color: #333; }
+        .bg-warm-beige { background-color: #fefcf9; }
+        .bg-soft-amber { background-color: #fffaf0; }
+        .text-deep-gray { color: #2d3748; }
+        .text-accent-red { color: #c53030; }
+        .border-accent-red { border-color: #c53030; }
+        .bg-accent-red { background-color: #c53030; }
+        .hover-bg-accent-red-dark:hover { background-color: #9b2c2c; }
+        .shadow-subtle { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+        .nav-link { transition: color 0.3s ease, border-color 0.3s ease; }
+        .nav-link.active { color: #c53030; border-bottom-color: #c53030; font-weight: 600; }
+        /* Đã loại bỏ .accordion-content vì không dùng accordion nữa */
+        .step-item.active { border-color: #c53030; background-color: #fff5f5; }
+        .step-item.active .step-number { background-color: #c53030; color: white; }
+        /* Xóa style liên quan đến chart-container nếu không còn chart nào, hoặc giữ lại nếu có ý định dùng Plotly */
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 0px; max-height: 0px; } 
+        @media (min-width: 768px) { .chart-container { height: 0px; } }
+        
+    </style>
+</head>
+<body class="bg-warm-beige text-deep-gray">
+
+    <header class="text-center p-6 md:p-10 border-b border-gray-200">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-accent-red mb-2">“GÁI XINH” CHỦ ĐỘNG NHẮN TIN</h1>
+        <p class="text-xl md:text-2xl font-semibold text-deep-gray">VẬN MAY ĐÃ TỚI hay TIỀN MẤT TẬT MANG?</p>
+        <p class="max-w-3xl mx-auto mt-4 text-gray-600">
+            Bạn có đang nhắn tin với một "cô gái" xinh đẹp, ngọt ngào vừa kết bạn qua Zalo hay Tinder? Cô ấy tỏ ra quan tâm, dịu dàng, thậm chí còn hứa hẹn về một tương lai? Khoan đã! Đừng vội tin. Rất có thể, người đang trò chuyện với bạn là một gã lừa đảo chuyên nghiệp, đang nhắm thẳng vào ví tiền và lòng tin của bạn. Lừa đảo giả gái trên mạng xã hội đã trở thành một tội phạm công nghệ cao, và đây là những gì bạn cần biết ngay lập tức để bảo vệ chính mình.
+        </p>
+    </header>
+
+    <nav id="navbar" class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center space-x-4 md:space-x-8 py-3">
+                <a href="#section-stats" class="nav-link text-gray-600 hover:text-accent-red border-b-2 border-transparent pb-2 text-sm md:text-base">Thực Trạng</a>
+                <a href="#section-targets" class="nav-link text-gray-600 hover:text-accent-red border-b-2 border-transparent pb-2 text-sm md:text-base">Nạn Nhân</a>
+                <a href="#section-playbook" class="nav-link text-gray-600 hover:text-accent-red border-b-2 border-transparent pb-2 text-sm md:text-base">Kịch Bản</a>
+                <a href="#section-signs" class="nav-link text-gray-600 hover:text-accent-red border-b-2 border-transparent pb-2 text-sm md:text-base">Dấu Hiệu</a>
+                <a href="#section-prevention" class="nav-link text-gray-600 hover:text-accent-red border-b-2 border-transparent pb-2 text-sm md:text-base">Phòng Tránh</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="section-stats" class="py-12 text-center scroll-mt-20">
+            <h2 class="text-3xl font-bold mb-2 text-deep-gray">Thực Trạng Đáng Báo Động</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Lừa đảo giả gái đã trở thành một dạng tội phạm công nghệ cao với thiệt hại khổng lồ cùng thủ đoạn ngày càng tinh vi.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-subtle border-t-4 border-accent-red">
+                    <p class="text-lg text-gray-500">Tổng thiệt hại theo thống kê của Bộ Công an và nhiều cơ quan báo chí ước tính (9 tháng đầu năm 2024)</p>
+                    <p id="total-loss" class="text-4xl md:text-5xl font-extrabold text-accent-red my-2">Hàng chục</p>
+                    <p class="text-lg font-bold text-deep-gray">Tỷ Đồng</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-subtle border-t-4 border-amber-500">
+                    <p class="text-lg text-gray-500">Vụ việc điển hình (một cụ ông 68 tuổi tại Lâm Đông)</p>
+                    <p id="case-loss" class="text-5xl font-extrabold text-amber-600 my-2">0</p>
+                    <p class="text-lg font-bold text-deep-gray">Tỷ Đồng</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-targets" class="py-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2 text-deep-gray">Ai Đang Bị "Săn"?</h2>
+            <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">Kẻ lừa đảo thường nhắm vào các nhóm đối tượng cụ thể có những đặc điểm tâm lý và hành vi nhất định. Dưới đây là 5 nhóm người mà "Gái Xinh" luôn thường nhắm đến.</p>
+             <div class="bg-white p-6 rounded-lg shadow-subtle max-w-2xl mx-auto">
+                <ul class="space-y-4 text-left text-gray-700">
+                    <li class="flex items-start">
+                        <span class="text-xl font-bold text-accent-red mr-3">1.</span>
+                        <p><strong>Nam giới trong độ tuổi 25–45:</strong> Đây là nhóm có công việc ổn định, khả năng tự lập tài chính và sử dụng mạng xã hội thường xuyên, có nhu cầu cao về tìm hiểu đầu tư chứng khoán, tiền ảo,…</p>
+                    </li>
+                     <li class="flex items-start">
+                        <span class="text-xl font-bold text-accent-red mr-3">2.</span>
+                        <p><strong>Người thường xuyên chơi game online, học sinh, sinh viên:</strong> Thường xuyên giao tiếp trong môi trường ảo, dễ bị dẫn dụ nạp game(mua trang phục, trang bị,…), chuyển tiền với số lượng nhỏ.</p>
+                    </li>
+                     <li class="flex items-start">
+                        <span class="text-xl font-bold text-accent-red mr-3">3.</span>
+                        <p><strong>Người độc thân, ít giao tiếp xã hội:</strong> Hay tìm kiếm bạn bè, người yêu qua mạng dễ mở lòng khi đối tượng tỏ ra quan tâm, thấu hiểu, dịu dàng, nói chuyện thân mật.</p>
+                    </li>
+                     <li class="flex items-start">
+                        <span class="text-xl font-bold text-accent-red mr-3">4.</span>
+                        <p><strong>Người dùng nhiều nền tảng MXH:</strong> Hay dùng Facebook, Zalo, Telegram, Discord hoặc các ứng dụng hẹn hò/trò chuyện trực tuyến (Tinder, Bumble, Facebook Dating, OkCupid,…)</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="section-playbook" class="py-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2 text-deep-gray">Bóc Trần Kịch Bản Lừa Đảo</h2>
+            <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">Hãy tìm hiểu các bước đi tinh vi của kẻ gian để không bị sập bẫy.</p>
+            <div class="flex flex-col md:flex-row">
+                <div id="steps-nav" class="md:w-1/3 flex md:flex-col justify-center mb-6 md:mb-0">
+                </div>
+                <div id="steps-content" class="md:w-2/3 bg-white p-6 rounded-lg shadow-subtle border-l-4 border-accent-red min-h-[250px]">
+                </div>
+            </div>
+        </section>
+
+        <section id="section-signs" class="py-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2 text-deep-gray">Checklist: 6 Dấu Hiệu "Lộ Tẩy"</h2>
+            <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">Nếu bạn thấy từ 2 dấu hiệu trở lên, hãy cẩn trọng. Đây là những "dấu vết sơ hở" mà những 'GÁI XINH' thường mắc phải.</p>
+            <div id="signs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+            
+            <div class="mt-8 p-6 bg-amber-50 border border-amber-200 rounded-lg max-w-4xl mx-auto text-gray-700">
+                <h4 class="font-bold text-amber-700 mb-2">Lưu ý quan trọng về Deepfake:</h4>
+                <p>Tuy nhiên hiện nay đã có nhiều phần mềm hiện đại đã có thể làm được các động tác, tương tác như thật trong khi video call khiến việc nhận ra vô cùng khó khăn.</p>
+                <p class="mt-3 text-sm italic">
+                    <a href="https://www.instagram.com/reel/DJohqefspRB/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-medium">
+                        (Nhấp vào để xem video Deepfake)
+                    </a>
+                    
+                </p>
+            </div>
+        </section>
+
+        <section id="section-prevention" class="py-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2 text-deep-gray">5 Nguyên Tắc Vàng Để Phòng Tránh</h2>
+            <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">Để bảo vệ túi tiền và trái tim "bé bỏng" của mình, hãy luôn ghi nhớ những điều sau đây.</p>
+            <div id="prevention-cards" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Content will be injected here -->
+            </div>
+             <div class="mt-8 text-center bg-red-100 border border-red-300 text-red-800 p-6 rounded-lg max-w-3xl mx-auto">
+                <h4 class="font-bold text-lg mb-2">Nếu đã nghi ngờ bị lừa đảo, bạn phải:</h4>
+                <ul class="list-none text-left space-y-2">
+                    <li class="flex items-start"><span class="font-bold text-accent-red mr-2">1.</span> <span>Ngừng liên lạc ngay lập tức. Không nghe theo bất kỳ yêu cầu nào của đối phương.</span></li>
+                    <li class="flex items-start"><span class="font-bold text-accent-red mr-2">2.</span> <span>Lưu lại tất cả bằng chứng:tin nhắn, hình ảnh, thông tin giao dịch.</span></li>
+                    <li class="flex items-start"><span class="font-bold text-accent-red mr-2">3.</span> <span>Trình báo với Cục An ninh mạng (A05) hoặc cơ quan Công an gần nhất.</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>Nếu thấy bổ ích hãy chia sẻ ngay bài viết cho gia đình, người thân và bạn bè xunh quanh của bạn</p>
+        <p>-ĐỖ VĂN MINH-</p>
+        
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const playbookData = [
+        { 
+            title: "Bước 1: Giả Gái & Chiếm Lòng Tin",
+            icon: "💬",
+            content: "Sử dụng hình ảnh phụ nữ xinh đẹp, là hot girl hoặc cô gái dễ thương ưa nhìn từ các trang cá nhân từ trong đến ngoài nước ta. Kẻ lừa đảo sẽ xây dựng một vỏ bọc đáng thương như 'vừa chia tay', 'cô đơn muốn tìm người tâm sự' để đánh vào tâm lý của nạn nhân. Sau thời gian ngắn, chúng sẽ nhanh chóng đẩy nhanh mối quan hệ bằng cách xưng hô thân mật 'anh-em', gửi ảnh riêng tư (thường là ảnh lấy từ trên mạng hoặc dùng AI tạo ra)." 
+        },
+        { 
+            title: "Bước 2: Dẫn Dụ Tài Chính",
+            icon: "💸",
+            content: "Dụ dỗ: “Anh thử đầu tư cùng em”, “Em đang chơi app này lời lắm”, “Anh giúp em nạp thẻ game”, “Anh giúp em đăng kí tài khoản này, xong việc anh em mình đi uống cà phê với nhau”,…. Dùng chiêu đầu tư ảo: Gửi link sàn “lợi nhuận cao”, ban đầu cho nạn nhân rút được tiền thật để tạo niềm tin, sau đó mới “nuốt sạch” số tiền lớn" 
+        },
+        { 
+            title: "Bước 3: Dùng Công Nghệ Cao (Deepfake/AI)",
+            icon: "🤖",
+            content: "Đây là chiêu thức nguy hiểm và tinh vi nhất. Kẻ gian sử dụng công nghệ Deepfake và AI Voice để giả mạo khuôn mặt và giọng nói trong các cuộc gọi video. Điều này khiến nạn nhân hoàn toàn tin rằng họ đang trò chuyện với gái thật, từ đó dễ dàng thao túng và lừa đảo hơn."
+        },
+        {
+            title: "Bước 4: Bẫy Tình Dục & Tống Tiền",
+            icon: " blackmail",
+            content: "Sau khi đã tạo được sự thân mật, lấy được lòng tin từ nạn nhận, đối tượng sẽ gợi ý 'chat sex', 'gọi video nhạy cảm' hoặc yêu cầu gửi ảnh riêng tư. Ngay khi nạn nhân sập bẫy, chúng sẽ ghi lại toàn bộ và sử dụng những hình ảnh/video này để đe dọa, tống tiền, yêu cầu nạn nhân phải chuyển một số tiền lớn nếu không sẽ phát tán cho gia đình và bạn bè biết."
+        }
+    ];
+
+    const signsData = [
+        { icon: "🆕", title: "Tài Khoản Khả Nghi", text: "Tài khoản mới tạo, ít bạn bè hoặc tài khoản có lượng tương tác khủng(thường là do buff tương tác)." },
+        { icon: "✨", title: "Profile Hào Nhoáng", text: "Ảnh đại diện là những nữ xinh ưa nhìn, nóng bỏng, cuốn hút, sang chảnh, có tính khiêu gợi cao, thường xuyên đăng ảnh ăn chơi,…" },
+        { icon: "💖", title: "Sớm tỏ ra thân mật", text: "Chỉ sau vài ngày đã dùng những từ ngữ như 'thương anh', 'yêu anh', 'chồng iu'." },
+        { icon: "💰", title: "Luôn Đề Cập Đến Tiền", text: "Thường xuyên nhờ vả 'nạp thẻ cho em', 'chuyển tiền cho em', 'đầu tư cùng em'." },
+        { icon: "🤨", title: "Video Call Bất Thường", text: "Hình ảnh có dấu hiệu deepfake: mặt hơi méo khi nói, biểu cảm gượng gạo, giọng nói không tự nhiên." },
+        { icon: "🏃", title: "Né Tránh Gặp Mặt", text: "Luôn có lý do để từ chối gặp mặt trực tiếp, chỉ muốn duy trì mối quan hệ online."}
+    ];
+
+    const preventionData = [
+        { title: "Nguyên tắc 1: KHÔNG gửi ảnh/video riêng tư", icon: "🔒", content: "Tuyệt đối không bao giờ gửi hình ảnh, video nhạy cảm hoặc thông tin cá nhân quan trọng cho người mới quen qua mạng, dù họ có tỏ ra đáng tin đến đâu. Đây là nguyên tắc bảo vệ cá nhân cơ bản nhất." },
+        { title: "Nguyên tắc 2: KHÔNG chuyển tiền dưới mọi hình thức", icon: "💸", content: "Không chuyển tiền, nạp thẻ, hay tham gia đầu tư cho bất kỳ ai nếu chưa gặp mặt trực tiếp và xác thực danh tính rõ ràng. Hãy nhớ: Không có 'bạn gái' nào cần bạn nạp thẻ hay góp vốn cả. Tuyệt đối đừng bao giờ đầu tư vào các app/sàn do 'bạn gái' giới thiệu." },
+        { title: "Nguyên tắc 3: KIỂM TRA kỹ tài khoản nghi ngờ", icon: "🔍", content: "Sử dụng tìm kiếm bằng hình ảnh trên Google để tìm kiếm ảnh đại diện xem có bị trùng với người khác không. Phân tích trang cá nhân của “gái xinh” xem cách đăng bài, bạn bè, cách viết – nếu trông đáng nghi như dấu hiệu bên trên, hãy đề phòng cẩn thận." },
+        { title: "Nguyên tắc 4: CẨN TRỌNG khi video call", icon: "👀", content: "Không tiết lộ hoàn toàn khuôn mặt của bạn. Nếu đối phương yêu cầu bạn quay mặt qua nhiều góc độ một cách kỳ lạ, đó là dấu hiệu họ đang cố gắng thu thập dữ liệu để tạo deepfake, giúp mở khóa các ví điện tử, tài khoản ngân hàng,... của bạn. Hãy kết thúc cuộc gọi ngay!" },
+        { title: "Nguyên tắc 5: CHIA SẺ để cùng phòng tránh", icon: "📣", content: "Hãy mạnh dạn chia sẻ những kiến thức và kinh nghiệm này cho người thân, bạn bè để cùng nhau xây dựng một cộng đồng an toàn hơn trên không gian mạng và giảm thiểu rủi ro bị lừa đảo."}
+    ];
+
+    const stepsNav = document.getElementById('steps-nav');
+    const stepsContent = document.getElementById('steps-content');
+    playbookData.forEach((step, index) => {
+        const stepButton = document.createElement('button');
+        stepButton.className = 'step-item flex items-center text-left w-full p-4 rounded-lg border-2 border-transparent transition-all duration-300 mb-2 hover:bg-gray-100';
+        stepButton.innerHTML = `<div class="step-number flex-shrink-0 w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center font-bold text-lg mr-4">${index + 1}</div><span class="font-semibold">${step.title}</span>`;
+        stepButton.onclick = () => {
+            document.querySelectorAll('.step-item').forEach(btn => btn.classList.remove('active'));
+            stepButton.classList.add('active');
+            stepsContent.innerHTML = `
+                <h3 class="text-2xl font-bold mb-4 text-accent-red">${step.title}</h3>
+                <p class="text-gray-700 leading-relaxed">${step.content}</p>
+            `;
+        };
+        stepsNav.appendChild(stepButton);
+    });
+    stepsNav.children[0].click();
+
+    const signsGrid = document.getElementById('signs-grid');
+    signsData.forEach(sign => {
+        signsGrid.innerHTML += `
+            <div class="bg-white p-6 rounded-lg shadow-subtle hover:shadow-lg transition-shadow duration-300 border-l-4 border-amber-400">
+                <div class="flex items-center mb-3">
+                    <span class="text-3xl mr-4">${sign.icon}</span>
+                    <h3 class="text-lg font-bold text-deep-gray">${sign.title}</h3>
+                </div>
+                <p class="text-gray-600">${sign.text}</p>
+            </div>
+        `;
+    });
+
+    const preventionCardsContainer = document.getElementById('prevention-cards');
+    preventionData.forEach((item, index) => {
+        preventionCardsContainer.innerHTML += `
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-accent-red hover:shadow-xl transition-all duration-300">
+                <div class="text-4xl mb-3 text-accent-red">${item.icon}</div>
+                <h3 class="text-xl font-bold mb-3 text-deep-gray">${item.title}</h3>
+                <p class="text-gray-700 leading-relaxed">${item.content}</p>
+            </div>
+        `;
+    });
+
+    function animateValue(obj, start, end, duration, suffix = '') {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            let currentVal = progress * (end - start) + start;
+            if (suffix === 'Tỷ Đồng') {
+                obj.innerHTML = currentVal.toFixed(1);
+            } else {
+                obj.innerHTML = Math.floor(currentVal).toLocaleString('vi-VN');
+            }
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Xóa animateValue cho total-loss (đã đổi thành text cố định "Hàng chục")
+                if (entry.target.id === 'case-loss') {
+                    animateValue(entry.target, 0, 19.3, 2000, 'Tỷ Đồng');
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const totalLossEl = document.getElementById('total-loss');
+    const caseLossEl = document.getElementById('case-loss');
+    if (caseLossEl) observer.observe(caseLossEl);
+    // Không cần observe totalLossEl vì đã là text cố định
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+</script>
+</body>
+</html>
